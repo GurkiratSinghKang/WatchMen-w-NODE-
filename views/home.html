@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<!-- 	
+	This file is rendered by express.js, when the home url of the chat is opened in a browser.
+	It doesn't do much, except showing the create button for the chat.
+ -->
+
+<html>
+
+<head id="head">
+
+	<title>WatchMen</title>
+
+	<link type="text/css" rel="stylesheet" href="css/stylesheet.css" />
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body>
+
+	<header class="homebanner">
+
+			<h1 class="homebannertext">
+				WatchMen
+			</h1>
+
+	</header>
+
+	<section id="section">
+
+		<div class="homesection">
+
+			<div class="node">
+				<img src="img/eyeglasses-310516_640.png" alt="nodelogo" id="nodelogo"/>
+			</div>
+
+				<button "Home" href="/start" id="createhome">
+				<div id="createbutton">
+					<div id="little">Protectors Of The Realm</div>
+					<div id="big">WatchMen</div>
+				</div>
+				</button>
+
+		</div>
+
+	</section>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+	<script >
+	$('#section').fadeIn(1000);
+		$('#createhome').click(function() {
+						$('body').fadeOut(1000,function(){
+							window.location.href = '/start';
+					    	return false;
+
+						});
+					    
+					});
+
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+(lp0
+S'http://admin:cif@172.16.62.132/video/mjpg.cgi'
+p1
+aS'http://admin:cif@172.16.62.211/video/mjpg.cgi'
+p2
+aS'http://admin:cif@172.16.61.22/video/mjpg.cgi'
+p3
+aS'http://admin:cifcharob@172.16.61.213/video/mjpg.cgi'
+p4
+a.

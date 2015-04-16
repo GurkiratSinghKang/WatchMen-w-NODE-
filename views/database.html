@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<!-- 	
+	This file is rendered by express.js, when the home url of the chat is opened in a browser.
+	It doesn't do much, except showing the create button for the chat.
+ -->
+
+<html>
+
+<head>
+
+	<title>WatchMen</title>
+
+	<link type="text/css" rel="stylesheet" href="css/stylesheet.css" />
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+
+</head>
+
+<body>
+
+	<div id="background"></div>
+
+	<header class="homebanner">
+
+			<h1 class="homebannertext">
+				Database Submenu
+			</h1>
+
+	</header>
+
+	<section id="section">
+
+		<div class="homesection">
+		
+			<button "Last" href="/database" id="create7">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Last Seen</div>
+				</div>
+			</button>
+
+			
+			<button "Last" href="/database" id="create8">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Last Seen</div>
+				</div>
+			</button>
+
+			<button "Last" href="/database" id="create1">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Last Seen</div>
+				</div>
+			</button>
+
+			<div id="dialogLast" title="Check Last Seen">
+			  <form>
+			    
+			      <label for="name">Name</label>
+			      <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
+			      <input type="submit"  style="position:absolute; top:-30px " id = "nameSubmit">
+			   
+			  </form>
+			</div>
+
+			<div id="dialogresultlast" title="Last Seen">
+			  <span id="resultlast"></span>
+			</div>
+			
+			<button "Track" href="/Entry" id="create2">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Track Person</div>
+				</div>
+			</button>
+			<div id="dialogTrack" title="Track">
+			  <form>
+			    
+			      <label for="name">Name</label>
+			      <input type="text" name="name" id="name2" value="" class="text ui-widget-content ui-corner-all">
+			      <input type="submit"  style="position:absolute; top:-30px " id = "nameSubmit2">
+			   
+			  </form>
+			</div>
+
+			<div id="dialogresultTrack" title="Track">
+			  <span id="resultTrack"></span>
+			</div>
+
+			
+			<button "Last" href="/database" id="create9">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Last Seen</div>
+				</div>
+			</button>
+
+			<button "Last" href="/database" id="create10">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Last Seen</div>
+				</div>
+			</button>
+			
+			<button "Last" href="/database" id="create11">
+				<div id="createbutton">
+					<div id="little">Time and Location</div>
+					<div id="big">Last Seen</div>
+				</div>
+			</button>
+
+			
+			<button "Notify" href="/train" id="create3">
+				<div id="createbutton">
+					<div id="little">Next Seen</div>
+					<div id="big">Notify</div>
+				</div>
+			</button>
+
+			<button "Back" href="/initialize" id="create4">
+				<div id="createbutton">
+					<div id="little">Go</div>
+					<div id="big">Back</div>
+				</div>
+			</button>
+
+
+
+
+		</div>
+
+	</section>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script >
+				$(function(){
+					$('#section').fadeIn(2000);
+					var socket = io.connect('/socket');
+					var person;
+					$('#create4').click(function() {
+					    $('body').fadeOut(1000,function  () {
+					    	window.location.href = '/start';
+					    	return false;
+					    });
+					});
+					
+
+
+					dialog = $( "#dialogLast" ).dialog({
+				      autoOpen: false,
+				      show: {
+				        effect: "blind",
+				        duration: 1000,
+				        position:"center"
+				      },
+				      hide: {
+				        effect: "explode",
+				        duration: 1000
+				      }
+				    });
+				 
+				    $( "#create1" ).click(function() {
+				      $( "#dialogLast" ).dialog( "open" );
+				    });
+
+				    form = dialog.find( "form" ).on( "submit", function( event ) {
+				      event.preventDefault();
+				      person = $("#name").val();
+				      socket.emit('getLastKnown',{person_name:person});
+				      dialog.dialog( "close" );
+		
+				    });
+				    socket.on('setLastKnown',function  (data) {
+				    	console.log(data.result);
+				    	$("#resultlast").text(data.result.substr(12));
+				    	$( "#dialogresultlast" ).dialog( "open" );
+				    });
+
+
+				    
+					    
+					    $( "#dialogresultlast" ).dialog({
+					      autoOpen: false,
+					      show: {
+					        effect: "blind",
+					        duration: 1000,
+					        position:"center"
+					      },
+					      hide: {
+					        effect: "explode",
+					        duration: 1000
+					      }
+					    });
+
+
+
+					 
+					    dialog2 = $( "#dialogTrack" ).dialog({
+				      autoOpen: false,
+				      show: {
+				        effect: "blind",
+				        duration: 1000,
+				        position:"center"
+				      },
+				      hide: {
+				        effect: "explode",
+				        duration: 1000
+				      }
+				    });
+				 
+				    $( "#create2" ).click(function() {
+				      $( "#dialogTrack" ).dialog( "open" );
+				    });
+
+				    form2= dialog2.find( "form" ).on( "submit", function( event ) {
+				      event.preventDefault();
+				      person = $("#name2").val();
+				      socket.emit('getTrack',{person_name:person});
+				      dialog2.dialog( "close" );
+		
+				    });
+				    socket.on('setTrack',function  (data) {
+				    	console.log(data.result);
+				    	
+				    	var newHTML=[];
+				    	newHTML.push('<p>'+(data.person)+' was seen on :</p>');
+				    	for (var i = (data.result).length - 1; i >= Math.max(1,(data.result).length-10); i--) {
+				    		newHTML.push('<p>'+(data.result)[i]+'</p>');
+				    	};
+				    	$("#resultTrack").html(newHTML.join(""));
+				    	//$("#resultTrack").text(text);
+				    	$( ".ui-dialog").css({'min-width': '450px'});
+				    	$( "#dialogresultTrack" ).dialog( "open" );
+
+				    });
+
+
+				    
+					    
+					    $( "#dialogresultTrack" ).dialog({
+					      autoOpen: false,
+					      show: {
+					        effect: "blind",
+					        duration: 1000,
+					        position:"center",
+
+					      },
+					      hide: {
+					        effect: "explode",
+					        duration: 1000
+					      }
+					    });
+				  	
+				    
+
+					
+				});
+			</script>
+
+</body>
+</html>

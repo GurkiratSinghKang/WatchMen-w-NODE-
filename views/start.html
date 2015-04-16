@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<!-- 	
+	This file is rendered by express.js, when the home url of the chat is opened in a browser.
+	It doesn't do much, except showing the create button for the chat.
+ -->
+
+<html>
+<head>
+
+	<title>WatchMen</title>
+
+	<link type="text/css" rel="stylesheet" href="css/stylesheet.css" />
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans Condensed:300italic,300,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+
+
+</head>
+
+
+<body>
+			<div id="background"></div>
+
+
+	<header class="homebanner">
+
+			<h1 class="homebannertext">
+				WatchMen Menu
+			</h1>
+
+	</header>
+
+	<section id="section">
+
+		<div class="homesection">
+			
+
+		    
+			<button "Database" href="/database" id="create7">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+			
+			<button "Database" href="/database" id="create8">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+
+			<button "Database" href="/database" id="create1">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+
+			<button "Entry" href="/Entry" id="create2">
+				<div id="createbutton">
+					<div id="little">Create</div>
+					<div id="big">Database Entry</div>
+				</div>
+			</button>
+			<button "Database" href="/database" id="create9">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+			
+			<button "Database" href="/database" id="create10">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+			
+			<button "Database" href="/database" id="create11">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+
+			<button "Display" href="/display" id="create3">
+				<div id="createbutton">
+					<div id="little">Display</div>
+					<div id="big">Live Feed</div>
+				</div>
+			</button>
+
+
+			<button "Train" href="/train" id="create4">
+				<div id="createbutton">
+					<div id="little">Database</div>
+					<div id="big">Train</div>
+				</div>
+			</button>
+			
+			<button "Database" href="/database" id="create12">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+			
+			<button "Database" href="/database" id="create13">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+			
+			<button "Database" href="/database" id="create14">
+				<div id="createbutton">
+					<div id="little">Query</div>
+					<div id="big">Database</div>
+				</div>
+			</button>
+			
+			<button "Initialize" href="/initialize" id="create5">
+				<div id="createbutton">
+					<div id="little">Initialize</div>
+					<div id="big">Cameras</div>
+				</div>
+			</button>
+
+			<div id="dialogLast" title="Initialize Cameras">
+			  <form>
+			    
+			      <label for="name">Enter Number Of Cameras </label>
+			      <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
+			      <input type="submit"  style="position:absolute; top:-30px " id = "nameSubmit">
+			   
+			  </form>
+			</div>
+
+			<div id="dialogLast1" title="Enter URLs">
+			  <form>
+			    
+			      <label for="name">Camera 0</label>
+			      <input type="text" name="name" id="name2" value="" class="text ui-widget-content ui-corner-all">
+			      <span id="addMore"></span>
+			      <input type="submit"  style="position:absolute; top:-30px " id = "nameSubmit">
+			   
+			  </form>
+			</div>
+
+			<div id="dialogLast2" title="Finished Initialization">
+			  <p>Done!</p>
+			</div>
+
+			<button "Exit" href="/exit" id="create6">
+				<div id="createbutton">
+					<div id="big">Exit</div>
+				</div>
+			</button>
+
+
+
+		</div>
+
+	</section>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script >
+				$(function(){
+					$('#section').fadeIn(1000);
+
+					var socket = io.connect('/socket');
+					$('#create1').click(function() {
+					    $('body').fadeOut(1000,function  () {
+					    	window.location.href = '/database';
+					    	return false;
+					    });
+					    
+					});
+					
+					$('#create3').click(function() {
+					    window.location.href = '/display';
+					    return false;
+					});
+
+					$('#create4').click(function() {
+					    window.location.href = '/train';
+					    return false;
+					});
+					$('#create6').click(function() {
+					    $('body').fadeOut(1000,function  () {
+					    	window.location.href = '/';
+					    	return false;
+					    });
+					});
+
+
+					var number_of_cams;
+					var cam_link =[];
+					dialog = $( "#dialogLast" ).dialog({
+				      autoOpen: false,
+				      show: {
+				        effect: "blind",
+				        duration: 1000,
+				        position:"center"
+				      },
+				      hide: {
+				        effect: "explode",
+				        duration: 1000
+				      }
+				    });
+				 
+				    $( "#create5" ).click(function() {
+				      $( "#dialogLast" ).dialog( "open" );
+				    });
+
+				    form = dialog.find( "form" ).on( "submit", function( event ) {
+				      event.preventDefault();
+				      number_of_cams = $("#name").val();
+				      dialog.dialog( "close" );
+						
+				    	var newHTML =[];
+				    	var num,num2;
+				      for (var i = 0; i < number_of_cams-1; i++) {
+				      		num = 3+i;
+				      		num2 = 1+i;
+							newHTML.push('<label for="name">Camera '+num2.toString()+'</label><input type="text" name="name" id="name'+num.toString()+'" value="" class="text ui-widget-content ui-corner-all">');
+						};
+						$("#addMore").html(newHTML.join(""));
+						$( "#dialogLast1" ).dialog( "open" );
+						console.log(number_of_cams);
+						
+						
+
+
+				    });
+
+				    dialog2 = $( "#dialogLast1" ).dialog({
+				      autoOpen: false,
+				      show: {
+				        effect: "blind",
+				        duration: 1000,
+				        position:"center"
+				      },
+				      hide: {
+				        effect: "explode",
+				        duration: 1000
+				      }
+				    });
+				 
+				    $( "#create2" ).click(function() {
+				      $( "#dialogLast1" ).dialog( "open" );
+				    });
+
+				    form2= dialog2.find( "form" ).on( "submit", function( event ) {
+				      event.preventDefault();
+				      cam_link=[];
+				       for (var i = 0; i < number_of_cams; i++) {
+				       	cam_link.push( $("#name"+(i+2).toString()).val());	       };
+				       console.log(cam_link);
+				       socket.emit('initCamera',{number:number_of_cams,cams:cam_link});
+
+				      dialog2.dialog( "close" );
+		
+				    });
+
+				    dialog3 = $( "#dialogLast2" ).dialog({
+				      autoOpen: false,
+				      show: {
+				        effect: "blind",
+				        duration: 1000,
+				        position:"center"
+				      },
+				      hide: {
+				        effect: "explode",
+				        duration: 1000
+				      }
+				    });
+				 
+				    socket.on('initDone',function() {
+				      $( "#dialogLast2" ).dialog( "open" );
+				    });
+
+					
+				});
+			</script>
+
+</body>
+</html>
